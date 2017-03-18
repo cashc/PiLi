@@ -1,10 +1,9 @@
-from LED import LED
+import LED
 from flask import Flask
 from flask import render_template
-# import os
-# from flask import send_from_directory
+
 app = Flask(__name__)
-lights = LED(20, 90, 150, 1)
+lights = LED.LED(20, 90, 150, 1)
 
 @app.route('/')
 @app.route('/<int:power>')

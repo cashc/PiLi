@@ -3,25 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>PiLi Home</title>
-    <!--<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/x-icon">-->
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>PiLi Home</h1>
+    <h1 style="color:rgba({{r}},{{g}},{{b}},{{p}})">PiLi Home</h1>
 
     <table>
         <tr>
-            <th>
-                RED
+            <th class="red">
+                Red
+                <svg>
+                    <circle cx="7" cy="7" r="6" fill="#a72e25"></circle>
+                </svg>
             </th>
-            <th>
-                GREEN
+            <th class="green">
+                Green
+                <svg>
+                    <circle cx="7" cy="7" r="6" fill="#48a738"></circle>
+                </svg>
             </th>
-            <th>
-                BLUE
-            </th>
-            <th>
-                Power
+            <th class="blue">
+                Blue
+                <svg>
+                    <circle cx="7" cy="7" r="6" fill="#3a4da7"></circle>
+                </svg>
             </th>
         </tr>
         <tr>
@@ -34,6 +40,18 @@
             <td>
                 {{b}}
             </td>
+        </tr>
+    </table>
+    <table>
+        <tr class="bLeft">
+            <th class="yellow">
+                Power
+                <svg>
+                    <circle cx="7" cy="7" r="6" fill="#cea900"></circle>
+                </svg>
+            </th>
+        </tr>
+        <tr>
             <td>
                 {{p}}
             </td>

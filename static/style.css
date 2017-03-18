@@ -1,0 +1,37 @@
+h1 {
+    padding: 0 0 0 15px;
+}
+
+table {
+    padding: 15px 0 0 20px;
+    width: 350px;
+}
+
+th {
+    text-align: left;
+}
+
+.bLeft {
+    border-left: solid;
+}
+
+svg {
+    height: 14px;
+    width: 14px;
+}
+
+.red {
+    color: #a72e25
+}
+
+.green {
+    color: #48a738
+}
+
+.blue {
+    color: #3a4da7
+}
+
+.yellow {
+    color: #cea900
+}

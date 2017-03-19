@@ -1,5 +1,15 @@
 h1 {
-    padding: 0 0 0 15px;
+    padding: 10px 0 0 15px;
+}
+
+#headerWrap {
+    margin-left: 15px;
+    width: 180px;
+    height: 100px;
+    border-radius: 25px;
+    border: solid;
+    border-color: #272822;
+    border-width: 1px;
 }
 
 table {
@@ -9,10 +19,6 @@ table {
 
 th {
     text-align: left;
-}
-
-.bLeft {
-    border-left: solid;
 }
 
 svg {

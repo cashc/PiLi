@@ -7,8 +7,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1 style="color:rgba({{lights.red}},{{lights.green}},{{lights.blue}},{{lights.power}})">PiLi Home</h1>
-
+    <div id="headerWrap" style="
+            {% if (lights.red+lights.green+lights.blue) > 700 %}
+                background: #272822
+            {% endif %}">
+        <h1 style="color:rgba({{lights.red}},{{lights.green}},{{lights.blue}},{{lights.power}})">
+            PiLi Home
+        </h1>
+    </div>
     <table>
         <tr>
             <th class="red">

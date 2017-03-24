@@ -4,6 +4,7 @@ Using Raspberry Pi to control LED Lights.
 ## Run   
 ```flask run --host=0.0.0.0```   
 _visible on local network_   
+`export FLASK_APP=app.py`
 
 ## Imports   
 `pip3 install flask`   

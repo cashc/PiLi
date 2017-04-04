@@ -3,7 +3,7 @@ from flask import Flask
 from flask import render_template
 
 app = Flask(__name__)
-lights = LED(20, 90, 150, 1)
+lights = LED(5, 30, 15, 1)
 lights.gpio()
 
 @app.route('/')
@@ -26,5 +26,11 @@ def index(red=None, green=None, blue=None, power=None):
     else: power = 1
 
     lights.update(red, green, blue, power)
+
+    if power == 0:
+        print("powering off")
+        lights.off()
+    else:
+        lights.gpio()
 
     return render_template('index.html', lights=lights)

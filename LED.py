@@ -1,5 +1,3 @@
-# import RPi.GPIO as GPIO
-# import time
 import pigpio
 
 pi = pigpio.pi()
@@ -26,11 +24,13 @@ class LED():
         self.power = power
 
     def gpio(self):
-        print(r, self.red, "\n")
-        print(g, self.green, "\n")
-        print(b, self.green, "\n")
-        # pi.set_PWM_dutycycle(PIN, BRIGHTNESS)
+        pi.set_PWM_dutycycle(r, self.red*self.power)
+        pi.set_PWM_dutycycle(g, self.green*self.power)
+        pi.set_PWM_dutycycle(b, self.blue*self.power)
 
-
+    def off(self):
+        pi.set_PWM_dutycycle(r,0)
+        pi.set_PWM_dutycycle(g,0)
+        pi.set_PWM_dutycycle(b,0)
 
 # pi.stop()

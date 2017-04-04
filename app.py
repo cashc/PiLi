@@ -4,6 +4,7 @@ from flask import render_template
 
 app = Flask(__name__)
 lights = LED(20, 90, 150, 1)
+lights.gpio()
 
 @app.route('/')
 @app.route('/<int:power>')
@@ -27,4 +28,3 @@ def index(red=None, green=None, blue=None, power=None):
     lights.update(red, green, blue, power)
 
     return render_template('index.html', lights=lights)
-

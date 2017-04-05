@@ -1,10 +1,14 @@
 # PiLi
 Using Raspberry Pi to control LED Lights.    
 
+![screen shot 2017-04-05 at 5 53 37 pm](https://cloud.githubusercontent.com/assets/11993240/24728661/dc40e5fe-1a28-11e7-9e17-fb1a0d65df0b.png)   
+
 ## Run   
-```flask run --host=0.0.0.0```   
-_visible on local network_   
 `export FLASK_APP=app.py`
+`sudo pigpiod`
+`flask run --host=0.0.0.0`   
+_visible on local network_   
+
 
 ## Imports   
 `pip3 install flask`   

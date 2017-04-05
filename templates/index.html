@@ -9,14 +9,22 @@
 </head>
 <body>
     <div id="headerWrap" style="background: rgba({{lights.red}},{{lights.green}},{{lights.blue}},{{lights.power}})">
+    <a class="fill-div" href="
+            {% if (lights.red+lights.green+lights.blue) > 0 %}
+                0,0,0
+            {% else %}
+                5,30,15,30
+            {% endif %}
+    ">
         <h1 style="
-            {% if (lights.red+lights.green+lights.blue) > 650 or lights.power < 0.2%}
+            {% if (lights.red+lights.green+lights.blue) > 650 or lights.power < 0.2 %}
                 color: #272822;
             {% endif %}">
             PiLi Home
         </h1>
+    </a>
     </div>
-    <table>
+    <table class="status">
         <tr>
             <th class="red">
                 Red
@@ -49,7 +57,7 @@
             </td>
         </tr>
     </table>
-    <table>
+    <table class="status">
         <tr class="bLeft">
             <th class="yellow">
                 Power
@@ -61,6 +69,20 @@
         <tr>
             <td>
                 {{lights.power}}
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td class="button redBG">
+                <a href="255,0,0" class="fill-div buttonText">Red</a>
+            </td>
+            <td class="button greenBG">
+                <a href="0,255,0" class="fill-div buttonText">Green</a>
+            </td>
+            <td class="button blueBG">
+                <a href="0,0,255" class="fill-div buttonText">Blue</a>
             </td>
         </tr>
     </table>

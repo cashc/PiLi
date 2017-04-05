@@ -3,7 +3,7 @@ from flask import Flask
 from flask import render_template
 
 app = Flask(__name__)
-lights = LED(5, 30, 15, 1)
+lights = LED(5, 30, 15, .3)
 lights.gpio()
 
 @app.route('/')

@@ -11,7 +11,7 @@ class LED():
     blue = 0
     power = 1
 
-    def __init__(self, red: int, green: int, blue: int, power: int):
+    def __init__(self, red: int, green: int, blue: int, power: float):
         self.red = red
         self.green = green
         self.blue = blue

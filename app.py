@@ -1,9 +1,10 @@
 from LED import LED
 from flask import Flask
 from flask import render_template
+import _thread
 
 app = Flask(__name__)
-lights = LED(200, 0, 200, 50)
+lights = LED(200, 0, 200, .5)
 lights.gpio()
 
 
@@ -46,7 +47,7 @@ def index(red=None, green=None, blue=None, power=None, function=None):
     return render_template('index.html', lights=lights)
 
 
-@app.route('/transition,<int:red>,<int:green>,<int:blue>,<int:power>')
-def transition(red, green, blue, power):
-    lights.transition(red, green, blue, power)
+@app.route('/to:<int:red>,<int:green>,<int:blue>,<int:speed>')
+def transition(red, green, blue, speed=None):
+    _thread.start_new_thread(lights.transition, (red, green, blue, speed))
     return render_template('index.html', lights=lights)

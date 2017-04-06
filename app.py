@@ -47,7 +47,8 @@ def index(red=None, green=None, blue=None, power=None, function=None):
     return render_template('index.html', lights=lights)
 
 
-@app.route('/to:<int:red>,<int:green>,<int:blue>,<int:speed>')
+@app.route('/to<int:red>,<int:green>,<int:blue>')
+@app.route('/to<int:red>,<int:green>,<int:blue>,<int:speed>')
 def transition(red, green, blue, speed=20):
     _thread.start_new_thread(lights.transition, (red, green, blue, speed))
     return render_template('index.html', lights=lights)

@@ -34,11 +34,12 @@ class LED():
         rBeg = self.red
         gBeg = self.green
         bBeg = self.blue
-        rDiff = abs(rBeg - toRed)/100
-        gDiff = abs(gBeg - toGreen)/100
-        bDiff = abs(bBeg - toBlue)/100
+        rDiff = (toRed - rBeg)/100
+        gDiff = (toGreen - gBeg)/100
+        bDiff = (toBlue - bBeg)/100
 
-        print("Increments:\nr:",rDiff,"g:", gDiff,"b", bDiff,"\n")
+        print("Beginning:\nr:{0}, g:{1}, b:{2}".format(rBeg,bBeg,bBeg))
+        print("Increments:\nr:{0}, g:{1}, b:{2}".format(rDiff, gDiff, bDiff))
         step = -1
         while(self.red == rBeg and self.green == gBeg and self.blue == bBeg):
             if step > 0:
@@ -53,6 +54,8 @@ class LED():
                 red = rBeg + i*rDiff
                 green = gBeg + i*gDiff
                 blue = bBeg + i*bDiff
+                if i==0 or i==100:
+                    print("r:{0}, g:{1}, b:{2}".format(int(red),int(green),int(blue)))
                 pi.set_PWM_dutycycle(r, red * self.power)
                 pi.set_PWM_dutycycle(g, green * self.power)
                 pi.set_PWM_dutycycle(b, blue * self.power)
@@ -62,3 +65,4 @@ class LED():
         pi.set_PWM_dutycycle(r, 0)
         pi.set_PWM_dutycycle(g, 0)
         pi.set_PWM_dutycycle(b, 0)
+

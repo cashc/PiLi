@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div id="headerWrap" style="background: rgba({{lights.red}},{{lights.green}},{{lights.blue}},{{lights.power}})">
+    <div id="headerWrap" style="background: rgb({{lights.red}},{{lights.green}},{{lights.blue}})">
     <a class="fill-div" href="
             {% if (lights.red+lights.green+lights.blue) > 0 %}
-                0,0,0
+                0
             {% else %}
-                5,30,15,30
+                1
             {% endif %}
     ">
         <h1 style="
@@ -75,13 +75,40 @@
 
     <table>
         <tr>
-            <td class="button redBG">
+            <td class="button" style="background: rgb(255,0,0)">
                 <a href="255,0,0" class="fill-div buttonText">Red</a>
             </td>
-            <td class="button greenBG">
+            <td class="button" style="background: rgb(0,255,0)">
                 <a href="0,255,0" class="fill-div buttonText">Green</a>
             </td>
-            <td class="button blueBG">
+            <td class="button" style="background: rgb(0,0,255)">
+                <a href="0,0,255" class="fill-div buttonText">Blue</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="button" style="background: rgb(255,102,0)">
+                <a href="255,102,0" class="fill-div buttonText">Orange</a>
+            </td>
+            <td class="button" style="background: rgb(255,255,0)">
+                <a href="255,255,0" class="fill-div buttonText">Yellow</a>
+            </td>
+            <td class="button" style="background: rgb(0,255,255)">
+                <a href="0,255,255" class="fill-div buttonText">Teal</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="button" style="background: rgb(255,1,153)">
+                <a href="255,1,153" class="fill-div buttonText">Pink</a>
+            </td>
+            <td class="button" style="background: rgb(102,1,255)">
+                <a href="102,1,255" class="fill-div buttonText">Purple</a>
+            </td>
+            <td class="button" style="background: rgb(186,143,255)">
+                <a href="255,255,255" class="fill-div buttonText">Blue</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="button" style="background: rgb(255,227,189)">
                 <a href="0,0,255" class="fill-div buttonText">Blue</a>
             </td>
         </tr>

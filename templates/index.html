@@ -6,11 +6,42 @@
     <title>PiLi Home</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        console.log("Started");
+        {% if lights.fading %}
+            var fading = true;
+            transitionToggle();
+        {% else %}
+            var fading = false;
+        {% endif %}
+
+        function fadeToggle(){
+            fading = !fading;
+            $('.button a').each(function(i, obj) {
+                var h = $(obj).attr('href');
+                if(fading){
+                    $(obj).attr('href', 'fade'+h);
+                } else{
+                    $(obj).attr('href', h.substr(4));
+                }
+
+            });
+
+        }
+
+    </script>
 </head>
 <body>
-    <div id="headerWrap" style="background: rgb({{lights.red}},{{lights.green}},{{lights.blue}})">
+    <div id="headerWrap" style="
+            {% if lights.fading %}
+                background: linear-gradient(rgb({{lights.red}},{{lights.green}},{{lights.blue}}), rgb({{r}},{{g}},{{b}}));
+            {% else %}
+                background: rgb({{lights.red}},{{lights.green}},{{lights.blue}});
+            {% endif %}
+    ">
     <a class="fill-div" href="
-            {% if (lights.red+lights.green+lights.blue) > 0 %}
+            {% if (lights.red+lights.green+lights.blue)*lights.power > 0 %}
                 0
             {% else %}
                 1
@@ -70,10 +101,19 @@
             <td>
                 {{lights.power}}
             </td>
+            <td style="text-align: right">
+                Fade:
+            </td>
+            <td>
+                <label class="switch">
+                    <input type="checkbox" onchange="fadeToggle()">
+                    <div class="slider round"></div>
+                </label>
+            </td>
         </tr>
     </table>
 
-    <table>
+    <table id="presets">
         <tr>
             <td class="button" style="background: rgb(255,0,0)">
                 <a href="255,0,0" class="fill-div buttonText">Red</a>
@@ -108,11 +148,11 @@
             </td>
         </tr>
         <tr>
-            <td class="button" style="background: rgb(255,227,189)">
-                <a href="255,227,80" class="fill-div buttonText">White</a>
+            <td class="button" style="background: rgb(255,246,237)">
+                <a href="255,230,75" class="fill-div buttonText">White</a>
             </td>
-            <td class="button transition">
-                <a href="255,227,80" class="fill-div buttonText">White</a>
+            <td class="button" style="background: rgb(255,207,142)">
+                <a href="255,185,55" class="fill-div buttonText">White2</a>
             </td>
         </tr>
     </table>

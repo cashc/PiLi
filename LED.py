@@ -12,6 +12,7 @@ class LED():
     green = 0
     blue = 0
     power = 1
+    fading = False
 
     def __init__(self, red: int, green: int, blue: int, power: float):
         self.red = red
@@ -30,18 +31,19 @@ class LED():
         pi.set_PWM_dutycycle(g, self.green * self.power)
         pi.set_PWM_dutycycle(b, self.blue * self.power)
 
-    def transition(self, toRed, toGreen, toBlue, speed=20):
+    def fade(self, toRed, toGreen, toBlue, speed=65):
+        self.fading = True
         rBeg = self.red
         gBeg = self.green
         bBeg = self.blue
-        rDiff = (toRed - rBeg)/100
-        gDiff = (toGreen - gBeg)/100
-        bDiff = (toBlue - bBeg)/100
 
-        print("Beginning:\nr:{0}, g:{1}, b:{2}".format(rBeg,bBeg,bBeg))
+        rDiff = (toRed - self.red) / 100
+        gDiff = (toGreen - self.green) / 100
+        bDiff = (toBlue - self.blue) / 100
         print("Increments:\nr:{0}, g:{1}, b:{2}".format(rDiff, gDiff, bDiff))
         step = -1
-        while(self.red == rBeg and self.green == gBeg and self.blue == bBeg):
+
+        while self.fading:
             if step > 0:
                 beg = 100
                 end = 0
@@ -50,19 +52,20 @@ class LED():
                 beg = 0
                 end = 100
                 step = 1
-            for i in range(beg,end,step):
-                red = rBeg + i*rDiff
-                green = gBeg + i*gDiff
-                blue = bBeg + i*bDiff
-                if i==0 or i==100:
-                    print("r:{0}, g:{1}, b:{2}".format(int(red),int(green),int(blue)))
+            for i in range(beg, end, step):
+                if not self.fading:
+                    break
+                red = rBeg + i * rDiff
+                green = gBeg + i * gDiff
+                blue = bBeg + i * bDiff
                 pi.set_PWM_dutycycle(r, red * self.power)
                 pi.set_PWM_dutycycle(g, green * self.power)
                 pi.set_PWM_dutycycle(b, blue * self.power)
                 time.sleep(speed / 1000)
 
+        print("EXITING FADE")
+
     def off(self):
         pi.set_PWM_dutycycle(r, 0)
         pi.set_PWM_dutycycle(g, 0)
         pi.set_PWM_dutycycle(b, 0)
-

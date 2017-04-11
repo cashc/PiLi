@@ -1,16 +1,16 @@
 h1 {
-    padding: 10px 0 0 15px;
+    padding: 24px 0 0 15px;
     color: white;
 }
 
 #headerWrap {
     margin-left: 15px;
-    width: 200px;
-    height: 100px;
+    width: 220px;
+    height: 140px;
     border-radius: 25px;
     border: solid;
     border-color: #272822;
-    border-width: 1px;
+    border-width: 0;
     text-align: center;
 }
 
@@ -29,9 +29,9 @@ h1 {
     color: white;
 }
 
-.transition {
-    background: -moz-linear-gradient(rgba(255,0,0,1), rgba(255,255,0,1)); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(rgba(255,0,0,1), rgba(255,255,0,1));
+.gradient {
+    background: -moz-linear-gradient(rgb(39, 255, 37), rgba(255, 255, 0, 1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgb(39, 255, 37), rgba(255, 255, 0, 1));
 }
 
 a.fill-div {
@@ -74,18 +74,59 @@ svg {
     color: #cea900
 }
 
-.redBG {
-    background-color: #a72e25
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
 }
 
-.greenBG {
-    background-color: #48a738
+.switch input {
+    display: none;
 }
 
-.blueBG {
-    background-color: #3a4da7
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
-.yellowBG {
-    background-color: #cea900
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

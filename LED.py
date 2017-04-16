@@ -33,6 +33,7 @@ class LED():
 
     def fade(self, toRed, toGreen, toBlue, speed=65):
         self.fading = True
+
         rBeg = self.red
         gBeg = self.green
         bBeg = self.blue
@@ -53,8 +54,6 @@ class LED():
                 end = 100
                 step = 1
             for i in range(beg, end, step):
-                if not self.fading:
-                    break
                 red = rBeg + i * rDiff
                 green = gBeg + i * gDiff
                 blue = bBeg + i * bDiff

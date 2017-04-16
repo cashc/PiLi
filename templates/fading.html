@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PiLi Fader</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    </script>
+</head>
+<body>
+    <div id="headerWrap" style="
+            {% if lights.fading %}
+                background: -moz-linear-gradient(rgb({{lights.red}},{{lights.green}},{{lights.blue}}), rgb({{r}},{{g}},{{b}}));
+                background: linear-gradient(rgb({{lights.red}},{{lights.green}},{{lights.blue}}), rgb({{r}},{{g}},{{b}}));
+            {% else %}
+                background: rgb({{lights.red}},{{lights.green}},{{lights.blue}});
+            {% endif %}
+    ">
+    <a class="fill-div" href="
+            {% if (lights.red+lights.green+lights.blue)*lights.power > 0 %}
+                0
+            {% else %}
+                1
+            {% endif %}
+    ">
+        <h1 style="
+            {% if (lights.red+lights.green+lights.blue) > 650 or lights.power < 0.2 %}
+                color: #272822;
+            {% endif %}">
+            PiLi Home
+        </h1>
+    </a>
+    </div>
+    <table class="status">
+        <tr>
+            <th class="red">
+                Red
+                <svg>
+                    <circle cx="7" cy="7" r="6" fill="#a72e25"></circle>
+                </svg>
+            </th>
+            <th class="green">
+                Green
+                <svg>
+                    <circle cx="7" cy="7" r="6" fill="#48a738"></circle>
+                </svg>
+            </th>
+            <th class="blue">
+                Blue
+                <svg>
+                    <circle cx="7" cy="7" r="6" fill="#3a4da7"></circle>
+                </svg>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                {{lights.red}}
+            </td>
+            <td>
+                {{lights.green}}
+            </td>
+            <td>
+                {{lights.blue}}
+            </td>
+        </tr>
+    </table>
+    <table class="status">
+        <tr class="bLeft">
+            <th class="yellow">
+                Power
+                <svg>
+                    <circle cx="7" cy="7" r="6" fill="#cea900"></circle>
+                </svg>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                {{lights.power}}
+            </td>
+            <td style="text-align: right">
+                Fade:
+            </td>
+            <td>
+                <label class="switch">
+                    <input type="checkbox" onchange="fadeToggle()">
+                    <div class="slider round"></div>
+                </label>
+            </td>
+        </tr>
+    </table>
+
+    <table id="presets">
+        <tr>
+            <td class="button" style="background: rgb(255,0,0)">
+                <a href="255,0,0" class="fill-div buttonText">Red</a>
+            </td>
+            <td class="button" style="background: rgb(0,255,0)">
+                <a href="0,255,0" class="fill-div buttonText">Green</a>
+            </td>
+            <td class="button" style="background: rgb(0,0,255)">
+                <a href="0,0,255" class="fill-div buttonText">Blue</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="button" style="background: rgb(255,102,0)">
+                <a href="255,102,0" class="fill-div buttonText">Orange</a>
+            </td>
+            <td class="button" style="background: rgb(255,255,0)">
+                <a href="255,255,0" class="fill-div buttonText">Yellow</a>
+            </td>
+            <td class="button" style="background: rgb(0,255,255)">
+                <a href="0,255,255" class="fill-div buttonText">Teal</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="button" style="background: rgb(255,1,153)">
+                <a href="255,1,153" class="fill-div buttonText">Pink</a>
+            </td>
+            <td class="button" style="background: rgb(102,1,255)">
+                <a href="102,1,255" class="fill-div buttonText">Purple</a>
+            </td>
+            <td class="button" style="background: rgb(186,143,255)">
+                <a href="255,255,255" class="fill-div buttonText">Purple2</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="button" style="background: rgb(255,246,237)">
+                <a href="255,230,75" class="fill-div buttonText">White</a>
+            </td>
+            <td class="button" style="background: rgb(255,207,142)">
+                <a href="255,185,55" class="fill-div buttonText">White2</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

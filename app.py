@@ -7,6 +7,7 @@ app = Flask(__name__)
 lights = LED(200, 0, 200, .5)
 lights.gpio()
 
+
 @app.route('/')
 @app.route('/<int:power>')
 @app.route('/<int:red>,<int:green>,<int:blue>')
@@ -50,9 +51,7 @@ def index(red=None, green=None, blue=None, power=None, function=None):
 @app.route('/fade<int:speed>')
 @app.route('/fade<int:red>,<int:green>,<int:blue>')
 @app.route('/fade<int:red>,<int:green>,<int:blue>,<int:speed>')
-def fade(red=None, green=None, blue=None, speed=50):
-    lights.fading = False
-
+def fade(red=None, green=None, blue=None, speed=0):
     if red is None:
         red = lights.red
     elif red > 255:
@@ -68,5 +67,10 @@ def fade(red=None, green=None, blue=None, speed=50):
     elif blue > 255:
         blue = 255
 
-    _thread.start_new_thread(lights.fade, (red, green, blue, speed))
-    return render_template('index.html', lights=lights, r=red, g=green, b=blue)
+    if speed is not 0 and lights.fading:
+        lights.speed = speed
+        return ('', 204)
+    else:
+        _thread.start_new_thread(lights.fade, (red, green, blue))
+
+    return render_template('fading.html', lights=lights, r=red, g=green, b=blue)

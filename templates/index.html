@@ -8,13 +8,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script type="text/javascript">
-        console.log("Started");
-        {% if lights.fading %}
-            var fading = true;
-            transitionToggle();
-        {% else %}
-            var fading = false;
-        {% endif %}
+
+        var fading = false;
 
         function fadeToggle(){
             fading = !fading;
@@ -23,21 +18,20 @@
                 if(fading){
                     $(obj).attr('href', 'fade'+h);
                 } else{
-                    $(obj).attr('href', h.substr(4));
+                    $(obj).attr('href', h.substring(4));
                 }
 
             });
-
         }
 
     </script>
 </head>
 <body>
-    <div id="headerWrap" style="
-            {% if lights.fading %}
-                background: linear-gradient(rgb({{lights.red}},{{lights.green}},{{lights.blue}}), rgb({{r}},{{g}},{{b}}));
+    <div id="headerWrap" style="background:
+            {% if lights.power == 0 %}
+                white;
             {% else %}
-                background: rgb({{lights.red}},{{lights.green}},{{lights.blue}});
+                rgb({{lights.red}},{{lights.green}},{{lights.blue}});
             {% endif %}
     ">
     <a class="fill-div" href="
@@ -48,7 +42,7 @@
             {% endif %}
     ">
         <h1 style="
-            {% if (lights.red+lights.green+lights.blue) > 650 or lights.power < 0.2 %}
+            {% if (lights.red+lights.green+lights.blue) > 650 or lights.power < 0.2%}
                 color: #272822;
             {% endif %}">
             PiLi Home

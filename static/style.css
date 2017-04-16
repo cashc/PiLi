@@ -1,6 +1,10 @@
 h1 {
-    padding: 24px 0 0 15px;
+    padding: 32px 0 0 15px;
     color: white;
+}
+
+a {
+    text-decoration: none;
 }
 
 #headerWrap {
@@ -10,7 +14,7 @@ h1 {
     border-radius: 25px;
     border: solid;
     border-color: #272822;
-    border-width: 0;
+    border-width: 1px;
     text-align: center;
 }
 
@@ -29,16 +33,15 @@ h1 {
     color: white;
 }
 
-.gradient {
-    background: -moz-linear-gradient(rgb(39, 255, 37), rgba(255, 255, 0, 1)); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(rgb(39, 255, 37), rgba(255, 255, 0, 1));
+.speed {
+    background-color: black;
+    border: 1px solid white;
 }
 
 a.fill-div {
     display: block;
     height: 100%;
     width: 100%;
-    text-decoration: none;
 }
 
 table {

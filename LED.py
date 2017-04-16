@@ -12,6 +12,7 @@ class LED():
     green = 0
     blue = 0
     power = 1
+    speed = 50
     fading = False
 
     def __init__(self, red: int, green: int, blue: int, power: float):
@@ -33,7 +34,7 @@ class LED():
 
     def fade(self, toRed, toGreen, toBlue, speed=65):
         self.fading = True
-
+        self.speed = speed
         rBeg = self.red
         gBeg = self.green
         bBeg = self.blue
@@ -60,7 +61,7 @@ class LED():
                 pi.set_PWM_dutycycle(r, red * self.power)
                 pi.set_PWM_dutycycle(g, green * self.power)
                 pi.set_PWM_dutycycle(b, blue * self.power)
-                time.sleep(speed / 1000)
+                time.sleep(self.speed / 1000)
 
         print("EXITING FADE")
 

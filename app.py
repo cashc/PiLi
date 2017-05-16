@@ -4,7 +4,7 @@ from flask import render_template
 import _thread
 
 app = Flask(__name__)
-lights = LED(200, 0, 200, .5)
+lights = LED(255, 102, 0, 1)
 lights.gpio()
 
 

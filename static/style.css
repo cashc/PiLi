@@ -34,8 +34,12 @@ a {
 }
 
 .speed {
+    padding: 1vw 1vw 1vw 1vw;
     background-color: black;
-    border: 1px solid white;
+    border-left: 0;
+    border-right: 1px;
+    border-color: white;
+    border-style: solid;
 }
 
 a.fill-div {

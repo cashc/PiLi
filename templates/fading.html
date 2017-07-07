@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PiLi Fader</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    </script>
+</head>
+<body>
+    <div id="headerWrap" style="
+            {% if lights.fading %}
+                background: -moz-linear-gradient(rgb({{lights.red}},{{lights.green}},{{lights.blue}}), rgb({{r}},{{g}},{{b}}));
+                background: linear-gradient(rgb({{lights.red}},{{lights.green}},{{lights.blue}}), rgb({{r}},{{g}},{{b}}));
+            {% else %}
+                background: rgb({{lights.red}},{{lights.green}},{{lights.blue}});
+            {% endif %}
+    ">
+    <a class="fill-div" href="1">
+        <h1 style="
+            {% if (lights.red+lights.green+lights.blue) > 650 or lights.power < 0.2 %}
+                color: #272822;
+            {% endif %}">
+            PiLi Home
+        </h1>
+    </a>
+    </div>
+    <table>
+        <tr>
+            <td class="speed">
+                <a href="fade10" class="buttonText">10</a>
+            </td>
+            <td class="speed">
+                <a href="fade20" class="buttonText">20</a>
+            </td>
+            <td class="speed">
+                <a href="fade30" class="buttonText">30</a>
+            </td>
+            <td class="speed">
+                <a href="fade40" class="buttonText">40</a>
+            </td>
+            <td class="speed">
+                <a href="fade50" class="buttonText">50</a>
+            </td>
+            <td class="speed">
+                <a href="fade60" class="buttonText">60</a>
+            </td>
+            <td class="speed">
+                <a href="fade70" class="buttonText">70</a>
+            </td>
+            <td class="speed">
+                <a href="fade80" class="buttonText">80</a>
+            </td>
+            <td class="speed">
+                <a href="fade90" class="buttonText">90</a>
+            </td>
+            <td class="speed">
+                <a href="fade100" class="buttonText">100</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

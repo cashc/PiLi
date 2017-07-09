@@ -21,7 +21,7 @@ class LED():
         self.blue = blue
         self.power = power
 
-    def update(self, red, green, blue, power):
+    def update(self, red: int, green: int, blue: int, power: float):
         self.red = red
         self.green = green
         self.blue = blue

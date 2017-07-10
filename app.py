@@ -37,7 +37,6 @@ def index(red=None, green=None, blue=None, power=None, function=None):
         print("powering off")
         lights.off()
     else:
-        pass
         lights.gpio()
 
     return render_template('index.html', lights=lights)
@@ -47,9 +46,14 @@ def post():
     red = request.form['red']
     green = request.form['green']
     blue = request.form['blue']
-    lights.update(red, green, blue, 1)
+    power = request.form['power']
+    lights.update(red, green, blue, power)
     return redirect(url_for('index'))
 
+@app.route('/sleep')
+def sleep():
+    _thread.start_new_thread(lights.sleep())
+    return redirect(url_for('index'))
 
 @app.route('/fade<int:speed>')
 @app.route('/fade<int:red>,<int:green>,<int:blue>')
@@ -57,18 +61,12 @@ def post():
 def fade(red=None, green=None, blue=None, speed=0):
     if red is None:
         red = lights.red
-    elif red > 255:
-        red = 255
 
     if green is None:
         green = lights.green
-    elif green > 255:
-        green = 255
 
     if blue is None:
         blue = lights.blue
-    elif blue > 255:
-        blue = 255
 
     if speed is not 0 and lights.fading:
         lights.speed = speed

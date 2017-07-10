@@ -12,6 +12,11 @@
     <script type="text/javascript">
 
         var fading = false;
+        var sliders = false;
+
+        $(document).ready(function() {
+            $('#custom-sliders').hide();
+        });
 
         function fadeToggle(){
             fading = !fading;
@@ -22,39 +27,37 @@
                 } else{
                     $(obj).attr('href', h.substring(4));
                 }
-
             });
         }
 
-        function showValue(newValue, id){
-            document.getElementById(id).innerHTML=newValue;
+        function toggleSliders(){
+            if(sliders){
+                $('#custom-a-tag').text(" + custom");
+                $('#custom-sliders').fadeOut(500);
+            } else {
+                $('#custom-sliders').fadeIn(500);
+                $('#custom-a-tag').text(" - custom");
+            }
+            sliders = !sliders;
         }
 
     </script>
 </head>
 <body>
-    <div id="headerWrap" style="background:
-            {% if lights.power == 0 %}
-                white;
-            {% else %}
-                rgb({{lights.red}},{{lights.green}},{{lights.blue}});
-            {% endif %}
-    ">
-    <a class="fill-div" href="
-            {% if (lights.red+lights.green+lights.blue)*lights.power > 0 %}
-                0
-            {% else %}
-                1
-            {% endif %}
-    ">
-        <h1 style="
-            {% if (lights.red+lights.green+lights.blue) > 650 or lights.power < 0.2%}
-                color: #272822;
-            {% endif %}">
-            PiLi Home
-        </h1>
-    </a>
+    <div id="header-wrap" style="background:
+                {% if lights.power == 0 %}
+                    white;
+                {% else %}
+                    rgb({{lights.red}},{{lights.green}},{{lights.blue}});
+                {% endif %}
+        ">
+        <a class="fill-div" href="{% if (lights.red+lights.green+lights.blue)*lights.power > 0 %}0{% else %}1{% endif %}">
+            <h1 style="{% if (lights.red+lights.green+lights.blue) > 650 or lights.power < 0.2%}color: #272822;{% endif %}">
+                PiLi Home
+            </h1>
+        </a>
     </div>
+
     <table class="status">
         <tr>
             <th class="red">
@@ -111,64 +114,73 @@
         </tr>
     </table>
 
-    <div data-role="main" class="ui-content">
-        <form method="post" action="/">
-            <label for="red">Red:</label>
-            <input type="range" name="red" id="red" value="{{ lights.red }}" min="0" max="255">
-
-            <label for="green">Green:</label>
-            <input type="range" name="green" id="green" value="{{ lights.green }}" min="0" max="255">
-
-            <label for="blue">Blue:</label>
-            <input type="range" name="blue" id="blue" value="{{ lights.blue }}" min="0" max="255">
-
-            <input type="submit" data-inline="true" value="Submit">
-        </form>
-    </div>
-
     <table id="presets">
         <tr>
             <td class="button" style="background: rgb(255,0,0)">
-                <a href="255,0,0" class="fill-div buttonText">Red</a>
+                <a href="255,0,0" class="fill-div">Red</a>
             </td>
             <td class="button" style="background: rgb(0,255,0)">
-                <a href="0,255,0" class="fill-div buttonText">Green</a>
+                <a href="0,255,0" class="fill-div">Green</a>
             </td>
             <td class="button" style="background: rgb(0,0,255)">
-                <a href="0,0,255" class="fill-div buttonText">Blue</a>
+                <a href="0,0,255" class="fill-div">Blue</a>
             </td>
         </tr>
         <tr>
             <td class="button" style="background: rgb(255,102,0)">
-                <a href="255,102,0" class="fill-div buttonText">Orange</a>
+                <a href="255,102,0" class="fill-div">Orange</a>
             </td>
             <td class="button" style="background: rgb(255,255,0)">
-                <a href="255,255,0" class="fill-div buttonText">Yellow</a>
+                <a href="255,255,0" class="fill-div">Yellow</a>
             </td>
             <td class="button" style="background: rgb(0,255,255)">
-                <a href="0,255,255" class="fill-div buttonText">Teal</a>
+                <a href="0,255,255" class="fill-div">Teal</a>
             </td>
         </tr>
         <tr>
             <td class="button" style="background: rgb(255,1,153)">
-                <a href="255,1,153" class="fill-div buttonText">Pink</a>
+                <a href="255,1,153" class="fill-div">Pink</a>
             </td>
             <td class="button" style="background: rgb(102,1,255)">
-                <a href="102,1,255" class="fill-div buttonText">Purple</a>
+                <a href="102,1,255" class="fill-div">Purple</a>
             </td>
             <td class="button" style="background: rgb(186,143,255)">
-                <a href="255,255,255" class="fill-div buttonText">Purple2</a>
+                <a href="255,255,255" class="fill-div">Purple2</a>
             </td>
         </tr>
         <tr>
             <td class="button" style="background: rgb(255,246,237)">
-                <a href="255,230,75" class="fill-div buttonText">White</a>
+                <a href="255,230,75" class="fill-div">White</a>
             </td>
             <td class="button" style="background: rgb(255,207,142)">
-                <a href="255,185,55" class="fill-div buttonText">White2</a>
+                <a href="255,185,55" class="fill-div">White2</a>
             </td>
         </tr>
     </table>
+
+    <div class="sliders">
+        <span class="button-square">
+            <a id="custom-a-tag" href="#" class="button-text" onclick="toggleSliders()"> + custom</a>
+        </span>
+
+        <div id="custom-sliders" data-role="main" class="ui-content">
+            <form method="post" action="/">
+                <label for="red">Red:</label>
+                <input type="range" name="red" id="red" value="{{ lights.red }}" min="0" max="255">
+
+                <label for="green">Green:</label>
+                <input type="range" name="green" id="green" value="{{ lights.green }}" min="0" max="255">
+
+                <label for="blue">Blue:</label>
+                <input type="range" name="blue" id="blue" value="{{ lights.blue }}" min="0" max="255">
+
+                <label for="power">Power:</label>
+                <input type="range" name="power" id="power" value="{{ lights.power*100 }}" min="0" max="100">
+
+                <input type="submit" data-inline="true" value="Submit">
+            </form>
+        </div>
+    </div>
 
 </body>
 </html>

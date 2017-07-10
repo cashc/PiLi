@@ -32,6 +32,35 @@ class LED():
         pi.set_PWM_dutycycle(g, self.green * self.power)
         pi.set_PWM_dutycycle(b, self.blue * self.power)
 
+    def sleep(self):
+        self.fading = True
+        self.speed = 65;
+        step = -1
+
+        rBeg = self.red
+        gBeg = self.green
+        bBeg = self.blue
+        rDiff = self.red / 100
+        gDiff = self.green / 100
+        bDiff = self.blue / 100
+
+        while self.fading:
+            if step > 0:
+                beg = 100
+                end = 0
+                step = -1
+            else:
+                beg = 0
+                end = 100
+                step = 1
+            for i in range(beg, end, step):
+                self.power = i/100
+                pi.set_PWM_dutycycle(r, self.red * self.power)
+                pi.set_PWM_dutycycle(g, self.green * self.power)
+                pi.set_PWM_dutycycle(b, self.blue * self.power)
+                time.sleep(self.speed / 1000)
+
+
     def fade(self, toRed, toGreen, toBlue, speed=65):
         self.fading = True
         self.speed = speed

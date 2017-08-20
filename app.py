@@ -1,6 +1,6 @@
 from LED import LED
 from flask import Flask
-from flask import render_template
+from flask import render_template, request, redirect, url_for
 import _thread
 
 app = Flask(__name__)
@@ -17,18 +17,12 @@ def index(red=None, green=None, blue=None, power=None, function=None):
     # only update color if a color is specified and max is 255
     if red is None:
         red = lights.red
-    elif red > 255:
-        red = 255
 
     if green is None:
         green = lights.green
-    elif green > 255:
-        green = 255
 
     if blue is None:
         blue = lights.blue
-    elif blue > 255:
-        blue = 255
 
     if power is None:
         power = lights.power
@@ -47,6 +41,19 @@ def index(red=None, green=None, blue=None, power=None, function=None):
 
     return render_template('index.html', lights=lights)
 
+@app.route('/', methods=['POST'])
+def post():
+    red = request.form['red']
+    green = request.form['green']
+    blue = request.form['blue']
+    power = request.form['power']
+    lights.update(red, green, blue, power)
+    return redirect(url_for('index'))
+
+@app.route('/sleep')
+def sleep():
+    _thread.start_new_thread(lights.sleep())
+    return redirect(url_for('index'))
 
 @app.route('/fade<int:speed>')
 @app.route('/fade<int:red>,<int:green>,<int:blue>')
@@ -54,18 +61,12 @@ def index(red=None, green=None, blue=None, power=None, function=None):
 def fade(red=None, green=None, blue=None, speed=0):
     if red is None:
         red = lights.red
-    elif red > 255:
-        red = 255
 
     if green is None:
         green = lights.green
-    elif green > 255:
-        green = 255
 
     if blue is None:
         blue = lights.blue
-    elif blue > 255:
-        blue = 255
 
     if speed is not 0 and lights.fading:
         lights.speed = speed
